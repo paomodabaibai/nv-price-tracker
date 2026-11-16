@@ -54,30 +54,33 @@ main{padding:22px 0 calc(100px + env(safe-area-inset-bottom,0px))}
 .range{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
 select{appearance:none;background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m2 2 4 4 4-4' fill='none' stroke='%2356665d' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 9px center;padding:5px 26px 5px 10px;border:1px solid #cbd6ce;border-radius:6px;line-height:1.55}
 .range select{font-size:13px;color:var(--ink)}
-.chart-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,29%);align-items:stretch;gap:22px;padding:18px 22px 16px}
+.chart-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;padding:18px 22px 20px}
 .plot-part{min-width:0}.chart-title{height:25px}
 #scale{font-size:12px;color:var(--muted);background-color:transparent;border:0;background-position:right 2px center;padding:3px 20px 3px 0}
 .point-key{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12px}.point-key svg{width:19px;color:var(--accent)}
-#plot{height:242px;position:relative;margin-top:6px;touch-action:pan-y}
+#plot{height:clamp(304px,calc(100vh - 580px),420px);position:relative;margin-top:8px;touch-action:pan-y}
 #chart{width:100%;height:100%;display:block;overflow:visible}
 #chart text{fill:var(--muted);font-family:inherit;font-size:11px}
 #tip{position:absolute;z-index:2;pointer-events:none;max-width:96%;padding:10px 13px;background:#1a2d23;color:#fff;border-radius:8px;font-size:12px;line-height:1.65;box-shadow:0 4px 16px #0d221d29}
 #tip b{display:block;color:#d4f2b8;margin-bottom:4px}
 #tip div{display:flex;gap:15px;justify-content:space-between}
 .chart-foot,.caption,.chart-note,.section-head>span,.quotes-title span,.quote-head{font-size:12px;color:var(--muted)}
-.chart-foot{margin:8px 0 0}
-.quotes{min-width:0;border-left:1px solid var(--rule);padding-left:20px}
-.quotes-title{margin-bottom:10px;gap:6px}.quotes-title h3{font-size:15px;font-weight:650}.quotes-title span{font-size:11px}
-.quote-head,.quote-row{display:grid;grid-template-columns:minmax(98px,1fr) 72px 56px;align-items:center;gap:4px;text-align:right}
-.quote-head{padding:1px 6px 6px;font-size:11px}.quote-head span:first-child{text-align:left}
-.quote-row{width:100%;padding:7px 6px;min-height:34px;border-top:1px solid #e7ece7;font-size:13px}
-.quote-row:hover{background:#f3f7f1}.quote-row[aria-pressed=true]{background:#e5f1e3}
-.model-name{display:flex;align-items:center;gap:6px;white-space:nowrap;text-align:left;font-weight:500}
+.chart-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;margin:8px 0 0}
+.spacing{display:inline-flex;align-items:center;gap:6px}.spacing select{font-size:12px;color:var(--ink)}
+.quotes{min-width:0;padding-top:16px;border-top:1px solid var(--rule)}
+.quotes-title{margin-bottom:10px}.quotes-title h3{font-size:15px;font-weight:650}
+.quotes-title .quote-help{margin-left:auto;font-size:12px}.quotes-title:has(#all:not([hidden])) .quote-help{display:none}
+.quote-head{display:none}
+#models{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;overflow:hidden;background:var(--rule);border:1px solid var(--rule);border-radius:9px}
+.quote-row{display:grid;width:100%;grid-template-columns:auto 1fr;align-content:start;align-items:baseline;gap:6px 8px;padding:12px;text-align:left;background:var(--paper);font-size:14px}
+.quote-row:hover{background:#f3f7f1}.quote-row[aria-pressed=true]{background:#e5f1e3;box-shadow:inset 0 0 0 1px #8eb49a}
+.quote-row:focus-visible{outline-offset:-2px}
+.model-name{display:flex;grid-column:1/-1;align-items:center;gap:6px;white-space:nowrap;text-align:left;font-weight:500}
 .model-name small{font-size:11px;color:var(--muted);font-weight:400}
 .swatch{width:14px;flex:none}
-.money{font-weight:650}.change{font-size:12px;color:var(--muted)}.up{color:#9e472f}.down{color:#216a45}
+.money{font-weight:650;font-size:17px}.change{text-align:right;font-size:12px;color:var(--muted)}.up{color:#9e472f}.down{color:#216a45}
 .prior-quote{grid-column:1/-1;color:var(--muted);font-size:11px}
-#all{display:block;margin:6px 0 0 auto;font-size:12px;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+#all{margin-left:auto;font-size:12px;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .chart-note{display:flex;align-items:center;gap:6px 9px;padding:10px 22px;background:#f6f9f4;border-top:1px solid var(--rule);border-radius:0 0 14px 14px}
 .chart-note svg{flex:none;width:16px;height:16px;stroke:var(--accent);stroke-width:1.5;fill:none}
 #live-note{margin-left:auto}#live-note:empty{display:none}
@@ -105,16 +108,17 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
 .dock a{display:flex;gap:8px;align-items:center;justify-content:center;white-space:nowrap;min-height:40px;padding:7px 18px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:550}
 .dock a:hover{background:#dae9dccc}.dock a[aria-current]{background:#244b37;color:#fff}
 .dock svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:1100px){
+  #models{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 @media(max-width:1000px){
-  .wrap{width:calc(100% - 48px)}.chart-grid{grid-template-columns:minmax(0,1fr) 270px;gap:14px;padding-inline:16px}.quotes{padding-left:14px}
+  .wrap{width:calc(100% - 48px)}.chart-grid{padding-inline:16px}
 }
 @media(max-width:760px){
   .wrap{width:calc(100% - 32px)}.bar{height:48px}.mast-inner{display:flex;justify-content:space-between;min-height:108px}
   .board-art{display:none}h1{font-size:27px}
-  .chart-grid{grid-template-columns:1fr;gap:16px}.quotes{border:0;border-top:1px solid var(--rule);padding:12px 0 0}
-  .quote-head,.quote-row{grid-template-columns:1fr 92px 76px}
-  .quote-row{padding-block:7px}.quotes-title{margin-bottom:7px}
-  #plot{height:220px}.chart-toolbar{padding:12px 16px}.chart-note{flex-wrap:wrap;padding:10px 16px}
+  .chart-grid{gap:14px}.quotes{padding-top:14px}
+  #plot{height:290px}.chart-toolbar{padding:12px 16px}.chart-note{flex-wrap:wrap;padding:10px 16px}
   #live-note:not(:empty){margin-left:0}.chart-note:has(#live-note:not(:empty)) #definition{flex:1 1 85%}
   .chart-note:has(#live-note:not(:empty)) #live-note{padding-left:25px}
   .lower{margin-top:22px}.matrix td,.matrix th{padding:10px 13px}
@@ -128,7 +132,15 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
   main{padding-top:14px}.chart-toolbar{align-items:flex-start;flex-direction:column;gap:10px}.chart-toolbar h2,.section-head h2{font-size:17px}
   .tools{width:100%;gap:8px}.range>span{display:none}.range select,.seg button{font-size:12px}
   .chart-grid{padding:12px 14px}.chart-foot,.chart-note,.caption,.section-head>span{font-size:11px}
-  #plot{height:203px}.section-head{gap:8px}.summary{padding:12px;font-size:12px}
+  #plot{height:260px}.chart-foot{row-gap:6px}
+  .quotes-title{margin-bottom:8px}.quotes-title .quote-help{font-size:11px}.compare-hint{display:none}
+  #models{display:block;border:0;border-radius:0;background:transparent}
+  .quote-head,.quote-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(68px,auto);align-items:center;gap:2px 8px;text-align:right;padding:8px 4px}
+  .quote-head{padding-block:0 5px;font-size:11px}
+  .quote-head span:first-child{text-align:left}
+  .quote-row{border-top:1px solid #e7ece7;min-height:44px}
+  .model-name{grid-column:auto}.money{font-size:14px}
+  .section-head{gap:8px}.summary{padding:12px;font-size:12px}
   .dock{width:min(365px,calc(100% - 24px));bottom:calc(10px + env(safe-area-inset-bottom,0px));gap:1px}
   .dock a{flex:1;padding:6px 3px;gap:5px;min-height:42px}
 }
@@ -178,12 +190,17 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
     <div class="chart-grid">
       <div class="plot-part"><div class="chart-title"><label><select id="scale" aria-label="纵轴指标"><option value="price">价格（元）</option><option value="percent">区间涨跌幅（%）</option></select></label>
         <span class="point-key"><svg aria-hidden="true" viewBox="0 0 20 10"><path d="M0 5h20" stroke="currentColor"/><circle cx="10" cy="5" r="3" fill="currentColor"/></svg>每轮最低报价</span></div>
-        <div id="plot" tabindex="0" role="group" aria-label="价格走势图，按左右方向键查看各轮采样"><svg id="chart" role="img" aria-label="各型号价格随采样时间变化"></svg><div id="tip" hidden></div></div>
-        <p id="coverage" class="chart-foot"></p><p id="scale-note" class="chart-foot" hidden>各型号以区间内首次有效报价为基准。</p>
+        <div id="plot" tabindex="0" role="group" aria-label="价格走势图，按左右方向键查看各轮采样"><svg id="chart" role="img" aria-label="各型号历轮最低报价"></svg><div id="tip" hidden></div></div>
+        <div class="chart-foot">
+          <label class="spacing">横轴<select id="spacing"><option value="round" selected>按轮次等距</option><option value="time">按实际时间</option></select></label>
+          <p id="coverage"></p>
+        </div>
+        <p id="scale-note" class="chart-foot" hidden>各型号以区间内首次有效报价为基准。</p>
       </div>
-      <aside class="quotes" aria-label="本轮型号报价"><div class="quotes-title"><h3>本轮报价</h3><span>点选型号可单独查看</span></div>
+      <aside class="quotes" aria-label="本轮型号报价"><div class="quotes-title"><h3>本轮最低报价</h3>
+        <span class="quote-help"><span class="compare-hint">涨跌较上轮 · </span>点选型号可单独查看</span><button id="all" type="button" hidden>显示全部型号</button></div>
         <div class="quote-head"><span>型号 / 显存</span><span>最低价</span><span>较上轮</span></div>
-        <div id="models"></div><button id="all" type="button">显示全部型号</button>
+        <div id="models"></div>
       </aside>
     </div>
     <div class="chart-note"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.3"/><path d="M10 9v5m0-8v1"/></svg><span id="definition">参考价取该规格本轮最低商品页标价，库存与结算价待核实。</span><span id="live-note"></span><button id="collect" hidden>立即采样</button></div>
@@ -214,6 +231,7 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
   const palette = ["var(--accent, #236b46)", "#597e6c", "#407476", "#546f87", "#946e40", "#374d42"];
   const dashes = ["", "5 3", "2 3", "9 3", "7 3 2 3", ""];
   const chart = byId("chart"), plot = byId("plot"), tip = byId("tip");
+  const spacing = byId("spacing");
   const number = new Intl.NumberFormat("zh-CN", {maximumFractionDigits:2});
   const money = fen => "¥" + number.format(fen / 100);
   const stamp = at => at.slice(5,10) + " " + at.slice(11,19);
@@ -239,6 +257,7 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
     if (Number.isInteger(saved.selected) && models[saved.selected]) selected = saved.selected;
     if (["1","7","30"].includes(saved.range)) byId("range").value = saved.range;
     if (saved.scale === "percent") byId("scale").value = saved.scale;
+    if (saved.spacing === "time") spacing.value = "time";
   } catch {}
 
   function svg(tag, attrs, label) {
@@ -297,6 +316,35 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
     const raw = Math.max(.01,span / 4), base = 10 ** Math.floor(Math.log10(raw));
     return ([1,2,2.5,5,10].find(v => v >= raw / base) || 10) * base;
   }
+  function drawTimeLabels(y, spread) {
+    function labelAt(j) {
+      const at = points[j].at;
+      if (spread < 120000) return at.slice(11,19);
+      if (spread <= 86400000) return at.slice(11,16);
+      return at.slice(5,10) + " " + at.slice(11,16);
+    }
+    const end = points.length - 1;
+    if (!spread) {
+      const center = (positions[0] + positions[end]) / 2;
+      chart.append(svg("text",{x:center,y,"text-anchor":"middle"},labelAt(0)));
+      return;
+    }
+    const first = svg("text",{x:positions[0],y,"text-anchor":"start"},labelAt(0));
+    const last = svg("text",{x:positions[end],y,"text-anchor":"end"},labelAt(end));
+    chart.append(first,last);
+    // All labels use the same date format and tabular numerals.
+    const width = first.getComputedTextLength(), gap = 16;
+    let previousRight = positions[0] + width, previousLabel = first.textContent;
+    const rightLimit = positions[end] - width - gap;
+    for (let j = 1; j < end; j++) {
+      const x = positions[j], label = labelAt(j);
+      if (x - width/2 < previousRight + gap || x + width/2 > rightLimit) continue;
+      if (label === previousLabel || label === last.textContent) continue;
+      chart.append(svg("text",{x,y,"text-anchor":"middle"},label));
+      previousRight = x + width/2;
+      previousLabel = label;
+    }
+  }
   function draw() {
     chart.replaceChildren(); tip.hidden = true; active = null;
     positions = []; roundPositions = []; markersByRound = [];
@@ -316,11 +364,14 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
     if (empty) {low = 0; high = 1;}
     const pad = high === low ? Math.max(1,high * .025) : (high - low) * .04;
     const step = niceStep(high - low + 2 * pad);
-    const floor = Math.floor((low-pad) / step) * step;
+    // Let the price overview fill the plot while keeping round, readable grid labels.
+    const limitStep = selected === null && !percent && !empty && high > low ? step / 5 : step;
+    const floor = Math.floor((low-pad) / limitStep) * limitStep;
     const min = percent ? floor : Math.max(0,floor);
-    const max = Math.ceil((high+pad) / step) * step;
+    const max = Math.ceil((high+pad) / limitStep) * limitStep;
     const y = value => b - (value - min) / (max - min) * (b-t);
-    for (let v=min; v<=max+step/100; v+=step) {
+    const firstTick = limitStep === step ? min : Math.ceil(min / step) * step;
+    for (let v=firstTick; v<=max+step/100; v+=step) {
       const yy = y(v);
       chart.append(svg("line",{x1:l,x2:r,y1:yy,y2:yy,stroke:"var(--rule, #e0e3e6)","stroke-dasharray":"3 4"}));
       if (!empty) chart.append(svg("text",{x:l-7,y:yy+4,"text-anchor":"end"},number.format(v) + (percent?"%":"")));
@@ -330,21 +381,14 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
       return;
     }
     const first = points[0], last = points.at(-1), spread = last.time - first.time;
-    positions = points.map(p => spread ? l + (p.time - first.time) / spread * (r-l) : (l+r)/2);
-    // Use elapsed time on the x-axis. Keep a lane for the final label on narrow screens.
-    const shortWindow = spread <= 86400000;
-    const seconds = shortWindow && spread < 120000;
-    let lastLabel = -Infinity;
-    positions.forEach((x,j) => {
-      if (!spread && j > 0) return;
-      const end = j === positions.length-1;
-      const gap = shortWindow ? 58 : 99;
-      if (!end && j > 0 && (x-lastLabel < gap || r-x < gap)) return;
-      const at = points[j].at;
-      const label = shortWindow ? at.slice(11,seconds ? 19 : 16) : at.slice(5,10) + " " + at.slice(11,16);
-      chart.append(svg("text",{x,y:b+17,"text-anchor":!spread?"middle":end?"end":j===0?"start":"middle"},label));
-      lastLabel = x;
-    });
+    roundPositions = points.length === 1 ? [(l+r)/2] : points.map((_,j) => l + j/(points.length-1)*(r-l));
+    positions = roundPositions;
+    if (spacing.value === "time") {
+      positions = points.map(p => spread ? l + (p.time - first.time) / spread * (r-l) : (l+r)/2);
+    }
+    drawTimeLabels(b+18, spread);
+    const roundGap = (r-l) / Math.max(1,points.length-1);
+    const pointRadius = Math.max(1.8, Math.min(3.4, (b-t)/100, roundGap/3));
     chart.append(svg("line",{id:"cursor",x1:0,x2:0,y1:t,y2:b,stroke:"var(--muted, #5e656e)","stroke-dasharray":"3 3",visibility:"hidden"}));
     markersByRound = points.map(() => []);
     indices.forEach(i => {
@@ -357,7 +401,7 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
         if (price == null) {pen = false; return;}
         const x = positions[j], yy = y(metric(p,i));
         path += (pen ? "L" : "M") + x.toFixed(2) + "," + yy.toFixed(2) + " ";
-        series.append(svg("circle",{class:"quote-point",cx:x,cy:yy,r:3.4,stroke:"var(--paper, white)","stroke-width":1.1}));
+        series.append(svg("circle",{class:"quote-point",cx:x,cy:yy,r:pointRadius,stroke:"var(--paper, white)","stroke-width":pointRadius/3}));
         markersByRound[j].push({y:yy,color:color(i)});
         pen = true;
       });
@@ -368,11 +412,9 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
     if (empty) chart.append(svg("text",{x:(l+r)/2,y:(b+t)/2,"text-anchor":"middle"},"此范围尚无该口径报价"));
 
     // This index spaces rounds evenly so closely timed and unpriced rounds remain selectable.
-    const spacing = Math.min(22,(r-l) / Math.max(1,points.length-1));
     const rail = svg("g",{class:"round-index"});
     rail.append(svg("title",{},"按采样先后排列，选择圆点查看该轮报价"),
                 svg("text",{x:l-7,y:roundY+4,"text-anchor":"end"},"轮次"));
-    roundPositions = points.map((_,j) => l + j*spacing);
     roundPositions.forEach((x,j) => {
       const ink = markersByRound[j].length ? "#6f8d7c" : "var(--muted, #5e656e)";
       rail.append(svg("circle",{class:"round-point",cx:x,cy:roundY,r:2.65,
@@ -393,7 +435,7 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
     }
     highlights.append(svg("circle",{cx:roundPositions[j],cy:roundY,r:5.2,stroke:"var(--accent, #236b46)",fill:"none","stroke-width":1.5}));
     tip.replaceChildren();
-    const head = document.createElement("b"); head.textContent = stamp(p.at); tip.append(head);
+    const head = document.createElement("b"); head.textContent = "第 " + (j+1) + " 轮 · " + stamp(p.at); tip.append(head);
     models.forEach((_,i) => {
       if (selected !== null && selected !== i) return;
       const row = document.createElement("div"), val = document.createElement("span");
@@ -443,11 +485,12 @@ summary{cursor:pointer;font-weight:500;padding:8px 0;width:fit-content}summary:h
     const coverage = points.length ? stamp(points[0].at) + " — " + stamp(last.at) : "尚无采样";
     byId("coverage").textContent = coverage + "　·　" + points.length + " 轮采样";
     rows(); draw();
-    try {sessionStorage.setItem(settingsKey,JSON.stringify({kind,selected,range:byId("range").value,scale:byId("scale").value}));} catch {}
+    try {sessionStorage.setItem(settingsKey,JSON.stringify({kind,selected,range:byId("range").value,scale:byId("scale").value,spacing:spacing.value}));} catch {}
   }
   byId("basis").addEventListener("click",e => {if (e.target.dataset.kind) {kind=e.target.dataset.kind; update();}});
   byId("range").addEventListener("change",update);
   byId("scale").addEventListener("change",update);
+  spacing.addEventListener("change",update);
   byId("all").addEventListener("click",() => {selected=null; update();});
   update();
   new ResizeObserver(draw).observe(plot);
